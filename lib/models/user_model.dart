@@ -28,4 +28,13 @@ class UserModel {
       token: map['token'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'token': token,
+    };
+  }
 }

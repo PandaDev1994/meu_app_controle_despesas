@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app_despesas/pages/register/register.dart';
+import 'package:my_app_despesas/pages/splash/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ class MyExpenses extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Register(),
+      home: Splash(),
     );
   }
 }

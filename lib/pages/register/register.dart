@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app_despesas/doc/api/user/user_api.dart';
+import 'package:my_app_despesas/pages/menu/menu.dart';
+import 'package:my_app_despesas/pages/splash/splash.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -53,14 +55,20 @@ class _RegisterState extends State<Register> {
   }
 
   void senUser() async {
-    print("apertei");
     var result = await apiUser.addNewUser(
       nameController.text,
       passController.text,
       emailController.text,
     );
 
-    print(result);
+    if (result.isEmpty) {
+      null;
+    } else {
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (_) => const Splash()));
+    }
+
+    print('result : $result');
   }
 
   ElevatedButton buttonCustom(String label, VoidCallback voidCallback) {
