@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app_despesas/pages/register/register.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +11,9 @@ class MyExpenses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Register(),
+    );
   }
 }
