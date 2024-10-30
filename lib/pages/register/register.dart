@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:my_app_despesas/comuns/comuns.dart';
 import 'package:my_app_despesas/doc/api/user/user_api.dart';
-import 'package:my_app_despesas/pages/menu/menu.dart';
+import 'package:my_app_despesas/pages/login/login.dart';
 import 'package:my_app_despesas/pages/splash/splash.dart';
 
 class Register extends StatefulWidget {
@@ -35,15 +38,35 @@ class _RegisterState extends State<Register> {
                     textFieldForNameAndEmail(
                         emailController, 'Email', 'Digite seu email aqui'),
                     textFieldForPass(
-                      passController,
-                      'Senha',
-                      '***********',
-                      visibilityOff ? Icons.visibility_off : Icons.visibility,
-                    ),
+                        passController,
+                        'Senha',
+                        '***********',
+                        visibilityOff ? Icons.visibility_off : Icons.visibility,
+                        visibilityOff, () {
+                      setState(() {
+                        visibilityOff = !visibilityOff;
+                      });
+                    }),
                     const SizedBox(
                       height: 10,
                     ),
                     buttonCustom('Cadastrar', () => senUser()),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Text('Já possui cadastro?'),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (_) => const Login()));
+                            },
+                            child: const Text('Clique aqui'))
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -67,65 +90,5 @@ class _RegisterState extends State<Register> {
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (_) => const Splash()));
     }
-
-    print('result : $result');
-  }
-
-  ElevatedButton buttonCustom(String label, VoidCallback voidCallback) {
-    return ElevatedButton.icon(
-      style: const ButtonStyle(
-          backgroundColor: WidgetStatePropertyAll(Colors.greenAccent)),
-      onPressed: voidCallback,
-      label: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
-        ),
-      ),
-      icon: const Icon(Icons.send_sharp),
-      iconAlignment: IconAlignment.end,
-    );
-  }
-
-  Padding textFieldForNameAndEmail(
-      TextEditingController controller, String label, String hint) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 7),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          labelText: label,
-          hintText: hint,
-        ),
-      ),
-    );
-  }
-
-  Padding textFieldForPass(TextEditingController controller, String label,
-      String hint, IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 7),
-      child: TextField(
-        obscureText: visibilityOff,
-        controller: controller,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(15))),
-          labelText: label,
-          hintText: hint,
-          suffixIcon: IconButton(
-            onPressed: () {
-              setState(() {
-                visibilityOff = !visibilityOff;
-              });
-            },
-            icon: Icon(icon),
-          ),
-        ),
-      ),
-    );
   }
 }

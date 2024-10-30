@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:my_app_despesas/doc/api/user/user_api.dart';
 import 'package:my_app_despesas/pages/menu/menu.dart';
@@ -51,6 +53,7 @@ class _SplashState extends State<Splash> {
   Future<void> initUser() async {
     Map<String, dynamic> user = await api.getUser();
 
+    // ignore: unnecessary_null_comparison
     if (user != null && user.isNotEmpty && user['id'] != null) {
       // Se o usuário existe, navegue para o Menu
       Navigator.of(context).pushReplacement(MaterialPageRoute(

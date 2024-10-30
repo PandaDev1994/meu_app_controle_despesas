@@ -1,6 +1,6 @@
 class CategoryModel {
   int? id;
-  int? name;
+  String? name;
 
   CategoryModel({
     required this.id,
